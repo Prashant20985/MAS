@@ -21,3 +21,49 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+# Ignore bin and obj folders
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.sln.docstates
+
+# Ignore NuGet packages
+*.nuget/
+*.nupkg
+packages/
+
+# Ignore Visual Studio files
+*.vs/
+*.vscode/
+
+# Ignore ReSharper files
+_ReSharper.*/
+
+# Ignore XUnit test results and reports
+TestResults/
+
+# Ignore local settings file
+appsettings.json
+
+# Ignore local development certificates
+*.pfx
+
+# Ignore publish profiles
+*.pubxml
+
+# Ignore IIS configuration files
+*.config
+
+# Ignore Windows PowerShell configuration files
+*.ps1xml
+*.psd1
+*.psm1
+
+# Ignore the project's output directory
+bin/
+obj/

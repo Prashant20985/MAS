@@ -28,7 +28,6 @@ namespace Mp5.Test.TestConfig
             });
 
             Mapper = mapper.CreateMapper();
-
             seed();
         }
 
@@ -89,6 +88,7 @@ namespace Mp5.Test.TestConfig
         public void Dispose()
         {
             DbContextOptions = null;
+            _dataContext.Database.EnsureDeleted();
             _dataContext.Dispose();
         }
     }

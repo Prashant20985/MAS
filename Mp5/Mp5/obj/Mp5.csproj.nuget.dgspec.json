@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sem6\\MAS\\Mp5\\Mp5\\Mp5.csproj": {}
+    "D:\\Sem6\\MAS\\MAS\\MAS\\Mp5\\Mp5\\Mp5.csproj": {}
   },
   "projects": {
-    "D:\\Sem6\\MAS\\Mp5\\Mp5\\Mp5.csproj": {
+    "D:\\Sem6\\MAS\\MAS\\MAS\\Mp5\\Mp5\\Mp5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sem6\\MAS\\Mp5\\Mp5\\Mp5.csproj",
+        "projectUniqueName": "D:\\Sem6\\MAS\\MAS\\MAS\\Mp5\\Mp5\\Mp5.csproj",
         "projectName": "Mp5",
-        "projectPath": "D:\\Sem6\\MAS\\Mp5\\Mp5\\Mp5.csproj",
+        "projectPath": "D:\\Sem6\\MAS\\MAS\\MAS\\Mp5\\Mp5\\Mp5.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "D:\\Sem6\\MAS\\Mp5\\Mp5\\obj\\",
+        "outputPath": "D:\\Sem6\\MAS\\MAS\\MAS\\Mp5\\Mp5\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

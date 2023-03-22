@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FKRi1o/70WbLp6ZI0mSLFH3PL43jx7Fy7/lvmJMl6eSbiWkYrldhByIPTIuuixCAJ7qdTsorLsKEeYjW1wVShg==",
+  "dgSpecHash": "abS92Dwd3TGDTtWk602k4xZYdWTbKmgHi94cAWOEcRekeXlwxemNypidVXm1SpeSEYqj9dKCg4MjFRKoiip1DA==",
   "success": true,
-  "projectFilePath": "D:\\Sem6\\MAS\\Mp5\\Mp5.Test\\Mp5.Test.csproj",
+  "projectFilePath": "D:\\Sem6\\MAS\\MAS\\MAS\\Mp5\\Mp5.Test\\Mp5.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dell\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

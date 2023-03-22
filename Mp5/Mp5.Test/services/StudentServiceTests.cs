@@ -45,7 +45,6 @@ namespace Mp5.Test.services
             Assert.Equal("Wayne", result.LastName);
             Assert.Equal("batman@test.com", result.Email);
             Assert.Single(result.Courses);
-            _dataContext.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -63,7 +62,6 @@ namespace Mp5.Test.services
             Assert.Equal("Bruce", result.FirstName);
             Assert.Equal("Wayne", result.LastName);
             Assert.Single(result.Courses);
-            _dataContext.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -76,7 +74,6 @@ namespace Mp5.Test.services
             // Assert
             Assert.NotNull(result);
             Assert.Equal(4, result.Count());
-            _dataContext.Database.EnsureDeleted();
         }
 
 
@@ -99,7 +96,6 @@ namespace Mp5.Test.services
             // Assert
             Assert.NotNull(result);
             Assert.Equal($"Student with {student.Email} Updated", result);
-            _dataContext.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -116,7 +112,6 @@ namespace Mp5.Test.services
             // Assert
             Assert.NotNull(result);
             Assert.Equal($"Student Clark Kent deleted", result);
-            _dataContext.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -138,7 +133,6 @@ namespace Mp5.Test.services
             // Assert
             Assert.NotNull(result);
             Assert.Equal("Studnet Added", result);
-            _dataContext.Database.EnsureDeleted();
         }
     }
 }
