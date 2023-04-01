@@ -9,7 +9,6 @@ namespace Mp5.Test.TestConfig
     public class TestConfiguration : IDisposable
     {
         public DbContextOptions<DataContext>? DbContextOptions { get; private set; }
-
         public IMapper Mapper { get; private set; }
 
         private readonly DataContext _dataContext;

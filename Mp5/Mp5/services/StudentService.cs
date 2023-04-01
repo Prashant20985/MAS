@@ -32,7 +32,10 @@ namespace Mp5.services
         {
             var checkEmail = await _context.People.AnyAsync(x => x.Email == student.Email);
             if (checkEmail)
+            {
                 return $"email: {student.Email} is already taken";
+            }
+                
 
             var newStudent = new Student
             {

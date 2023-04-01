@@ -21,7 +21,7 @@ public class OTTShow implements Serializable {
     private LocalDate airDate;
 
     //Complex Attribute
-    private OTTShowSettings ottShowSettings = new OTTShowSettings(false, true);
+    private OTTShowSettings ottShowSettings = new OTTShowSettings(false, false);
 
     //Multi-Value Attribute
     private final Set<String> nameOfEpisodes = new HashSet<>();
@@ -32,8 +32,6 @@ public class OTTShow implements Serializable {
     }
 
     //Method Overloading
-
-
     public OTTShow(String showName, String showDescription, LocalDate airDate, OTTShowSettings ottShowSettings, String nameOfEpisode) {
         setOttShowSettings(ottShowSettings);
         setAirDate(airDate);
@@ -199,7 +197,7 @@ public class OTTShow implements Serializable {
     }
 
     public void removeEpisodeName(String episodeName){
-        if(episodeName.isEmpty() || episodeName == null){
+        if(episodeName == null || episodeName.isEmpty()){
             throw new IllegalArgumentException("Episode node must not be null or Empty");
         }
         if(!nameOfEpisodes.contains(episodeName)){

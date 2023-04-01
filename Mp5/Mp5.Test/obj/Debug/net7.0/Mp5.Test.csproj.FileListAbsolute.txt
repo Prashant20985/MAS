@@ -304,3 +304,6 @@ D:\Sem6\MAS\MAS\MAS\Mp5\Mp5.Test\obj\Debug\net7.0\refint\Mp5.Test.dll
 D:\Sem6\MAS\MAS\MAS\Mp5\Mp5.Test\obj\Debug\net7.0\Mp5.Test.pdb
 D:\Sem6\MAS\MAS\MAS\Mp5\Mp5.Test\obj\Debug\net7.0\Mp5.Test.genruntimeconfig.cache
 D:\Sem6\MAS\MAS\MAS\Mp5\Mp5.Test\obj\Debug\net7.0\ref\Mp5.Test.dll
+D:\Sem6\MAS\MAS\MAS\Mp5\Mp5.Test\bin\Debug\net7.0\Serilog.dll
+D:\Sem6\MAS\MAS\MAS\Mp5\Mp5.Test\bin\Debug\net7.0\Serilog.Sinks.Console.dll
+D:\Sem6\MAS\MAS\MAS\Mp5\Mp5.Test\bin\Debug\net7.0\Serilog.Sinks.File.dll

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Mp5.data;
 using Mp5.profiles;
 using Mp5.services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 

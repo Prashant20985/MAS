@@ -7,15 +7,18 @@ import java.util.Set;
 public class ActivityRecord {
 
     private static final Set<ActivityRecord> activityRecordExtent = new HashSet<>();
-
     private String startDate;
     private String endDate;
+    private Activity activity;
+    private Trainee trainee;
 
-    private final Set<Activity> activities = new HashSet<>();
-
-    public ActivityRecord(String startDate, String endDate) {
+    public ActivityRecord(String startDate, String endDate, Activity activity, Trainee trainee) {
         setStartDate(startDate);
         setEndDate(endDate);
+        setActivity(activity);
+        setTrainee(trainee);
+        activity.addActivityRecord(this);
+        trainee.addActivityRecord(this);
         activityRecordExtent.add(this);
     }
 
@@ -29,7 +32,7 @@ public class ActivityRecord {
 
     public void setStartDate(String startDate) {
         if(startDate == null || startDate.isBlank()){
-            throw new IllegalArgumentException("Start Date must not be null or Blank");
+            throw new IllegalArgumentException("Start Date must not be Blank or Null");
         }
         this.startDate = startDate;
     }
@@ -39,48 +42,40 @@ public class ActivityRecord {
     }
 
     public void setEndDate(String endDate) {
-        if(startDate == null || startDate.isBlank()){
-            throw new IllegalArgumentException("Start Date must not be null or Blank");
+        if(endDate == null || endDate.isBlank()){
+            throw new IllegalArgumentException("End Date must not be Blank or Null");
         }
         this.endDate = endDate;
     }
 
-    public Set<Activity> getActivities() {
-        return Collections.unmodifiableSet(activities);
+    public Activity getActivity() {
+        return activity;
     }
 
-    public static void clear(){
-        activityRecordExtent.clear();
-    }
-
-    public void addActivityRecord(Activity activity){
+    public void setActivity(Activity activity) {
         if(activity == null){
             throw new IllegalArgumentException("Activity must not be null");
         }
-        if(activities.contains(activity)) return;
-
-        activities.add(activity);
+        this.activity = activity;
     }
 
-    public void removeActivityRecord(Activity activity){
-        if(activity == null){
-            throw new IllegalArgumentException("Activity must not be null");
-        }
-        if(!activities.contains(activity)) return;
+    public Trainee getTrainee() {
+        return trainee;
+    }
 
-        activities.remove(activity);
-        Activity.delete(activity);
+    public void setTrainee(Trainee trainee) {
+        if(trainee == null){
+            throw new IllegalArgumentException("Trainee must not be null");
+        }
+        this.trainee = trainee;
     }
 
     public static void delete(ActivityRecord activityRecord){
         if(activityRecord == null){
-            throw new IllegalArgumentException("Activity record must not be null");
+            throw new IllegalArgumentException("Activity Record must not be null");
         }
-
-        Set<Activity> activitiesTmp = Set.copyOf(activityRecord.activities);
-        activityRecord.activities.clear();
-        activitiesTmp.forEach(Activity::delete);
-
+        activityRecord.activity.removeActivityRecord(activityRecord);
+        activityRecord.trainee.removeActivityRecord(activityRecord);
         activityRecordExtent.remove(activityRecord);
     }
 }

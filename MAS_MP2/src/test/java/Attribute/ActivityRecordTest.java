@@ -7,39 +7,33 @@ import static org.junit.Assert.*;
 
 public class ActivityRecordTest {
 
+    private Activity activity;
+    private Activity activity2;
+    private ActivityRecord activityRecord;
+    private ActivityRecord activityRecord2;
+    private Trainee trainee;
+    private Trainee trainee2;
+
     @Before
     public void setUp(){
-        Activity.clear();
-        ActivityRecord.clear();
-        Trainee.clear();
+        activity = new Activity("Activity 1");
+        activity2 = new Activity("Activity 2");
+        trainee = new Trainee("Prashant","Sharma");
+        trainee2 = new Trainee("Prashant2","Sharma2");
+        activityRecord = new ActivityRecord("01-01-2023", "01-02-2023", activity, trainee);
+        activityRecord2 = new ActivityRecord("01-01-2023", "01-02-2023", activity2, trainee2);
     }
 
     @Test
-    public void addActivityRecord(){
-        ActivityRecord activityRecord = new ActivityRecord("01-03-3023", "01-04-2023");
-        Trainee trainee = new Trainee("Tyler", "Durden");
-        Activity activity = new Activity("Activity1", activityRecord, trainee);
-        assertEquals(1, activityRecord.getActivities().size());
-    }
-
-    @Test
-    public void removeActivityRecord(){
-        ActivityRecord activityRecord = new ActivityRecord("01-03-3023", "01-04-2023");
-        Trainee trainee = new Trainee("Tyler", "Durden");
-        Activity activity = new Activity("Activity1", activityRecord, trainee);
-        assertEquals(1, activityRecord.getActivities().size());
-        activityRecord.removeActivityRecord(activity);
-        assertEquals(0, activityRecord.getActivities().size());
-    }
-
-    @Test
-    public void delete(){
-        ActivityRecord activityRecord = new ActivityRecord("01-03-3023", "01-04-2023");
-        Trainee trainee = new Trainee("Tyler", "Durden");
-        Activity activity = new Activity("Activity1", activityRecord, trainee);
-        assertEquals(1, ActivityRecord.getActivityRecordExtent().size());
+    public void delete() {
         ActivityRecord.delete(activityRecord);
-        assertEquals(0, ActivityRecord.getActivityRecordExtent().size());
+        assertEquals(1, ActivityRecord.getActivityRecordExtent().size());
+        assertEquals(0, activity.getActivityRecords().size());
+        assertEquals(0, trainee.getActivityRecords().size());
 
+        ActivityRecord.delete(activityRecord2);
+        assertEquals(0, ActivityRecord.getActivityRecordExtent().size());
+        assertEquals(0, activity2.getActivityRecords().size());
+        assertEquals(0, trainee2.getActivityRecords().size());
     }
 }

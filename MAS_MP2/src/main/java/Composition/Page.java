@@ -8,8 +8,8 @@ public class Page {
     private String pageName;
     private Book book;
 
-    public Page(String bookName, Book book) {
-        setPageName(bookName);
+    public Page(String pageName, Book book) {
+        setPageName(pageName);
         setBook(book);
         book.addPage(this);
         extent.add(this);
@@ -34,7 +34,7 @@ public class Page {
         return book;
     }
 
-    public void setBook(Book book) {
+    private void setBook(Book book) {
         if(book == null){
             throw new IllegalArgumentException("Book must not be null");
         }

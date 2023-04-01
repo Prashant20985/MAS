@@ -1,6 +1,5 @@
 package Attribute;
 
-import Basic.Student;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,54 +7,39 @@ import static org.junit.Assert.*;
 
 public class TraineeTest {
 
+    private Activity activity;
+    private Activity activity2;
+    private ActivityRecord activityRecord;
+    private ActivityRecord activityRecord2;
+    private Trainee trainee;
+    private Trainee trainee2;
+
     @Before
     public void setUp(){
-        Activity.clear();
-        ActivityRecord.clear();
-        Trainee.clear();
+        activity = new Activity("Activity 1");
+        activity2 = new Activity("Activity 2");
+        trainee = new Trainee("Prashant","Sharma");
+        trainee2 = new Trainee("Prashant2","Sharma2");
+        activityRecord = new ActivityRecord("01-01-2023", "01-02-2023", activity, trainee);
+        activityRecord2 = new ActivityRecord("01-01-2023", "01-02-2023", activity2, trainee2);
     }
 
     @Test
-    public void addActivity(){
-        ActivityRecord activityRecord = new ActivityRecord("01-03-3023", "01-04-2023");
-        Trainee trainee = new Trainee("Tyler", "Durden");
-        Activity activity = new Activity("Activity1", activityRecord, trainee);
-        Activity activity1 = new Activity("Activity 2", activityRecord, trainee);
-        assertEquals(2, trainee.getActivities().size());
-        assertFalse(!trainee.getActivities().contains(activity1));
-        assertFalse(!trainee.getActivities().contains(activity));
-    }
+    public void activityTest(){
+        //Add ActivityRecord
+        assertEquals(1, trainee.getActivityRecords().size());
+        assertEquals(1, trainee2.getActivityRecords().size());
 
-    @Test
-    public void removeActivity(){
-        ActivityRecord activityRecord = new ActivityRecord("01-03-3023", "01-04-2023");
-        Trainee trainee = new Trainee("Tyler", "Durden");
-        Activity activity = new Activity("Activity1", activityRecord, trainee);
-        Activity activity1 = new Activity("Activity 2", activityRecord, trainee);
-        assertEquals(2, trainee.getActivities().size());
+        //Remove ActivityRecord
+        trainee.removeActivityRecord(activityRecord);
+        assertEquals(0, trainee.getActivityRecords().size());
+        trainee2.removeActivityRecord(activityRecord2);
+        assertEquals(0, trainee2.getActivityRecords().size());
 
-        trainee.removeActivity(activity1);
-        assertFalse(trainee.getActivities().contains(activity1));
-        assertTrue(trainee.getActivities().contains(activity));
-        assertEquals(1, trainee.getActivities().size());
-
-        trainee.removeActivity(activity);
-        assertFalse(trainee.getActivities().contains(activity1));
-        assertFalse(trainee.getActivities().contains(activity));
-        assertEquals(0, trainee.getActivities().size());
-    }
-
-    @Test
-    public void delete(){
-        ActivityRecord activityRecord = new ActivityRecord("01-03-3023", "01-04-2023");
-        Trainee trainee = new Trainee("Tyler", "Durden");
-        Activity activity = new Activity("Activity1", activityRecord, trainee);
-
-        assertEquals(1, Trainee.getTraineeExtent().size());
-
+        //Delete Activity
         Trainee.delete(trainee);
-        assertFalse(Trainee.getTraineeExtent().contains(trainee));
-        assertFalse(Activity.getActivityExtent().contains(activity));
-        assertFalse(activity.getActivityRecord().getActivities().contains(activity));
+        assertEquals(1, Trainee.getTraineeExtent().size());
+        Trainee.delete(trainee2);
+        assertEquals(0, Trainee.getTraineeExtent().size());
     }
 }

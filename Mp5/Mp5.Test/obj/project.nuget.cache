@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "abS92Dwd3TGDTtWk602k4xZYdWTbKmgHi94cAWOEcRekeXlwxemNypidVXm1SpeSEYqj9dKCg4MjFRKoiip1DA==",
+  "dgSpecHash": "TZRfdJdhRwkBcAaRLHeGEzLyyzB43nOsm0lesYZbf/koj8mYTJYU2ZhezRLr8vFhSLYmVQMh3d44EVcPf/EtvA==",
   "success": true,
   "projectFilePath": "D:\\Sem6\\MAS\\MAS\\MAS\\Mp5\\Mp5.Test\\Mp5.Test.csproj",
   "expectedPackageFiles": [
@@ -60,6 +60,9 @@
     "C:\\Users\\Dell\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\serilog\\2.12.0\\serilog.2.12.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\serilog.sinks.console\\4.1.0\\serilog.sinks.console.4.1.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.4\\sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\sqlitepclraw.core\\2.1.4\\sqlitepclraw.core.2.1.4.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.4\\sqlitepclraw.lib.e_sqlite3.2.1.4.nupkg.sha512",

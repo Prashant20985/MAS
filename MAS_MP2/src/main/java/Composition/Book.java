@@ -33,7 +33,7 @@ public class Book {
         return Collections.unmodifiableSet(allPages);
     }
 
-    public Page checkPage(Page page){
+    public void checkPage(Page page){
         if(page == null){
             throw new IllegalArgumentException("Page must not be null");
         }
@@ -41,7 +41,6 @@ public class Book {
             throw new IllegalArgumentException("Page Name must not be null");
         }
 
-        return page;
     }
 
     public void addPage(Page page) {
