@@ -47,9 +47,6 @@ public class Course {
     }
 
     public boolean hasEnrolment(Student student){
-        if(enrollments.stream().anyMatch(x -> x.getStudent().equals(student))){
-            return true;
-        }
-        return false;
+        return enrollments.stream().anyMatch(x -> x.getStudent().equals(student));
     }
 }

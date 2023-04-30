@@ -7,7 +7,7 @@ using Mp5.models;
 
 namespace Mp5.services
 {
-    public interface ICourseService
+    internal interface ICourseService
     {
         Task<List<CourseDTO>> GetCourses();
         Task<string> AssignCourseToStudent(int studentId, string courseName);

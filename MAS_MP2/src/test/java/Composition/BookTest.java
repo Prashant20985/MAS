@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class BookTest {
 
     @Test
-    public void addPage(){
+    public void addPage() {
         Book book1 = new Book("Book1");
         assertEquals(0, book1.getAllPages().size());
         Page page1 = new Page("page1", book1);
@@ -17,7 +17,7 @@ public class BookTest {
     }
 
     @Test
-    public void removePage(){
+    public void removePage() {
         Book book1 = new Book("Book1");
         assertEquals(0, book1.getAllPages().size());
         Page page1 = new Page("page1", book1);

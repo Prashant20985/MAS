@@ -25,7 +25,7 @@ public class Council {
     }
 
     public void setName(String name) {
-        if(name == null){
+        if (name == null) {
             throw new IllegalArgumentException("Name Must not be null");
         }
         this.name = name;
@@ -36,26 +36,29 @@ public class Council {
     }
 
     public void removeMember(Member member) {
-        if(member == null){
+        if (member == null) {
             throw new IllegalArgumentException("Member must not be null");
         }
-        if(!members.contains(member)) return;
+        if (!members.contains(member)) return;
         members.remove(member);
         member.removeCouncil(this);
     }
 
     public void addMember(Member member) {
-        if(member == null){
+        if (member == null) {
             throw new IllegalArgumentException("Member must not be null");
         }
-        if(members.contains(member)) return;
+        if (members.contains(member)) return;
         members.add(member);
         member.addCouncil(this);
     }
 
-    public static void delete(Council council){
+    public static void delete(Council council) {
+        if (council == null)
+            throw new IllegalArgumentException("Council must not be null");
+
         Set<Member> membersTemp = Set.copyOf(council.members);
-        council.members.remove(council);
+        council.members.clear();
         membersTemp.forEach(x -> x.removeCouncil(council));
         extent.removeIf(x -> x.name.equals(council.getName()));
     }

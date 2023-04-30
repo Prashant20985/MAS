@@ -1,9 +1,6 @@
 package Subset;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -27,10 +24,10 @@ public class Playlist {
         this.name = name;
     }
 
-    public Set<Song> getSongs() {
+    public List<Song> getSongs() {
         return songs.stream()
                 .sorted(Comparator.comparingInt(Song::getDurationInSeconds))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     public void addSong(Song song){

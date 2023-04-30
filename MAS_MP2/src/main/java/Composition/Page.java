@@ -24,7 +24,7 @@ public class Page {
     }
 
     public void setPageName(String pageName) {
-        if(pageName == null){
+        if (pageName == null) {
             throw new IllegalArgumentException("Book name must not be null");
         }
         this.pageName = pageName;
@@ -35,14 +35,14 @@ public class Page {
     }
 
     private void setBook(Book book) {
-        if(book == null){
+        if (book == null) {
             throw new IllegalArgumentException("Book must not be null");
         }
         this.book = book;
     }
 
-    public static void delete(Page page){
-        if(page == null){
+    public static void delete(Page page) {
+        if (page == null) {
             throw new IllegalArgumentException("Page Must not be null");
         }
         page.book.removePage(page);

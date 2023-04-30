@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class CouncilTest {
 
     @Test
-    public void addCouncil(){
+    public void addCouncil() {
         Member member1 = new Member("member1");
         Council council1 = new Council("council1");
         Council council2 = new Council("council2");
@@ -51,7 +51,7 @@ public class CouncilTest {
     }
 
     @Test
-    public void findByName(){
+    public void findByName() {
         Member member1 = new Member("member1");
         Council council1 = new Council("council1");
         Council council2 = new Council("council2");
@@ -64,7 +64,7 @@ public class CouncilTest {
     }
 
     @Test
-    public void deleteCouncil(){
+    public void deleteCouncil() {
         Member member1 = new Member("member1");
         Council council1 = new Council("council1");
         Council council2 = new Council("council2");

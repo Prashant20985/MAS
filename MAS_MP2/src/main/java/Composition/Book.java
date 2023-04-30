@@ -22,8 +22,8 @@ public class Book {
         return bookName;
     }
 
-    public void setBookName(String bookName) {
-        if(bookName == null || bookName.isBlank()){
+    private void setBookName(String bookName) {
+        if (bookName == null || bookName.isBlank()) {
             throw new IllegalArgumentException("Book name must not be null or Blank");
         }
         this.bookName = bookName;
@@ -33,32 +33,35 @@ public class Book {
         return Collections.unmodifiableSet(allPages);
     }
 
-    public void checkPage(Page page){
-        if(page == null){
+    public void checkPage(Page page) {
+        if (page == null) {
             throw new IllegalArgumentException("Page must not be null");
         }
-        if(page.getPageName().isBlank()){
+        if (page.getPageName().isBlank()) {
             throw new IllegalArgumentException("Page Name must not be null");
         }
-
     }
 
     public void addPage(Page page) {
         checkPage(page);
-        if(allPages.contains(page)){
+        if (page.getBook() != this)
+            throw new IllegalArgumentException("Page is of different Book");
+        if (allPages.contains(page))
             return;
-        }
         allPages.add(page);
     }
 
     public void removePage(Page page) {
         checkPage(page);
-        if(!allPages.contains(page)) return;
+        if (!allPages.contains(page)) return;
         allPages.remove(page);
         Page.delete(page);
     }
 
-    public static void delete(Book book){
+    public static void delete(Book book) {
+        if (book == null)
+            throw new IllegalArgumentException("Book must not be null");
+
         Set<Page> pageTemp = Set.copyOf(book.allPages);
         book.allPages.clear();
         pageTemp.forEach(Page::delete);

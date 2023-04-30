@@ -133,7 +133,13 @@ public class OTTShowTest {
     @Test
     public void showSettings(){
         OTTShowSettings ottShowSettings = new OTTShowSettings(false, true);
-        OTTShow show = new OTTShow("ShowName", "showDescription", LocalDate.now().plusDays(1), ottShowSettings, "S1:EP1");
+        OTTShow show = new OTTShow(
+                "ShowName",
+                "showDescription",
+                LocalDate.now().plusDays(1),
+                ottShowSettings,
+                "S1:EP1");
+
         assertTrue(show.getOttShowSettings().getIsPurchased());
         assertFalse(show.getOttShowSettings().getIsNotAvailable());
 

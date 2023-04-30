@@ -9,8 +9,8 @@ public class GroupTest {
 
     @Test
     public void addStudent() {
-        Student student1 = new Student(1,"Prashant", "Sharma");
-        Student student2 = new Student(2,"Vatsal", "Patel");
+        Student student1 = new Student(1, "Prashant", "Sharma");
+        Student student2 = new Student(2, "Vatsal", "Patel");
         Group group1 = new Group("group1");
         assertEquals(0, group1.getStudents().size());
         assertEquals(0, student1.getGroups().size());
@@ -23,9 +23,9 @@ public class GroupTest {
     }
 
     @Test
-    public void removeStudent(){
-        Student student1 = new Student(1,"Prshant", "Sharma");
-        Student student2 = new Student(2,"Vatsal", "Patel");
+    public void removeStudent() {
+        Student student1 = new Student(1, "Prshant", "Sharma");
+        Student student2 = new Student(2, "Vatsal", "Patel");
         Group group1 = new Group("group1");
         assertEquals(0, group1.getStudents().size());
         assertEquals(0, student1.getGroups().size());
@@ -46,9 +46,9 @@ public class GroupTest {
     }
 
     @Test
-    public void deleteGroup(){
-        Student student1 = new Student(1,"Prshant", "Sharma");
-        Student student2 = new Student(2,"Vatsal", "Patel");
+    public void deleteGroup() {
+        Student student1 = new Student(1, "Prshant", "Sharma");
+        Student student2 = new Student(2, "Vatsal", "Patel");
         Group group1 = new Group("group1");
         assertEquals(0, group1.getStudents().size());
         assertEquals(0, student1.getGroups().size());

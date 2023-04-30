@@ -1,7 +1,5 @@
 package Overlapping;
 
 public enum PokemonType {
-    WATER,
-    ELECTRIC,
-    FIRE
+    FIRE, WATER, ELECTRIC
 }

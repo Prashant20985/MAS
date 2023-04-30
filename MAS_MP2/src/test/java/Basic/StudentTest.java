@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 public class StudentTest {
 
     @Test
-    public void addGroup(){
-        Student student1 = new Student(1,"Prshant", "Sharma");
+    public void addGroup() {
+        Student student1 = new Student(1, "Prshant", "Sharma");
         Group group1 = new Group("group1");
         Group group2 = new Group("group2");
         assertEquals(0, group1.getStudents().size());
@@ -22,8 +22,8 @@ public class StudentTest {
     }
 
     @Test
-    public void removeStudent(){
-        Student student1 = new Student(1,"Prshant", "Sharma");
+    public void removeStudent() {
+        Student student1 = new Student(1, "Prshant", "Sharma");
         Group group1 = new Group("group1");
         Group group2 = new Group("group2");
         assertEquals(0, group1.getStudents().size());
@@ -45,8 +45,8 @@ public class StudentTest {
     }
 
     @Test
-    public void deleteGroup(){
-        Student student1 = new Student(1,"Prshant", "Sharma");
+    public void deleteGroup() {
+        Student student1 = new Student(1, "Prshant", "Sharma");
         Group group1 = new Group("group1");
         Group group2 = new Group("group2");
         assertEquals(0, group1.getStudents().size());

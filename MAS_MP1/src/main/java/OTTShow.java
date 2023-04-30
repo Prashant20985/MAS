@@ -37,7 +37,7 @@ public class OTTShow implements Serializable {
         setAirDate(airDate);
         setShowDescription(showDescription);
         setShowName(showName);
-        nameOfEpisodes.add(nameOfEpisode);
+        addEpisodeName(nameOfEpisode);
         extent.add(this);
     }
 
@@ -49,6 +49,7 @@ public class OTTShow implements Serializable {
             e.printStackTrace();
         }
     }
+
     //load extent
     public static void loadExtent() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(EXTENT_PERSISTENCE_PATH))) {
@@ -94,7 +95,8 @@ public class OTTShow implements Serializable {
         if(newAirDate == null || newAirDate.isBefore(LocalDate.now()))
             throw new IllegalArgumentException("Input Date must be a further date from Today");
 
-        OTTShow show = OTTShow.findByName(showName).get();
+        OTTShow show = OTTShow.findByName(showName).isPresent() ? OTTShow.findByName(showName).get() : null;
+        assert show != null;
         show.setAirDate(newAirDate);
         System.out.println(show);
         return show;
@@ -151,7 +153,7 @@ public class OTTShow implements Serializable {
 
         String trimmedShowDescription = showDescription.trim();
 
-        if(trimmedShowDescription.isEmpty()){
+        if(trimmedShowDescription.isBlank()){
             throw new IllegalArgumentException("Show Description should not be blank");
         }
         this.showDescription = trimmedShowDescription;
@@ -187,7 +189,7 @@ public class OTTShow implements Serializable {
     }
 
     public void addEpisodeName(String episodeName){
-        if(episodeName == null || episodeName.isEmpty()){
+        if(episodeName == null || episodeName.isBlank()){
             throw new IllegalArgumentException("Episode node must not be null or Empty");
         }
         if(nameOfEpisodes.contains(episodeName)){
@@ -197,7 +199,7 @@ public class OTTShow implements Serializable {
     }
 
     public void removeEpisodeName(String episodeName){
-        if(episodeName == null || episodeName.isEmpty()){
+        if(episodeName == null || episodeName.isBlank()){
             throw new IllegalArgumentException("Episode node must not be null or Empty");
         }
         if(!nameOfEpisodes.contains(episodeName)){

@@ -25,7 +25,7 @@ public class Trainee {
     }
 
     public void setFirstName(String firstName) {
-        if(firstName == null || firstName.isBlank()){
+        if (firstName == null || firstName.isBlank()) {
             throw new IllegalArgumentException("first Name must not be blank or null");
         }
         this.firstName = firstName;
@@ -36,7 +36,7 @@ public class Trainee {
     }
 
     public void setLastName(String lastName) {
-        if(lastName == null || lastName.isBlank()){
+        if (lastName == null || lastName.isBlank()) {
             throw new IllegalArgumentException("Last name must not be blank or null");
         }
         this.lastName = lastName;
@@ -46,25 +46,27 @@ public class Trainee {
         return Collections.unmodifiableSet(activityRecords);
     }
 
-    public void addActivityRecord(ActivityRecord activityRecord){
-        if(activityRecord == null){
+    public void addActivityRecord(ActivityRecord activityRecord) {
+        if (activityRecord == null) {
             throw new IllegalArgumentException("Activity record must not be null");
         }
-        if(activityRecords.contains(activityRecord)) return;
+        if (activityRecords.contains(activityRecord)) return;
         activityRecords.add(activityRecord);
     }
 
-    public void removeActivityRecord(ActivityRecord activityRecord){
-        if(activityRecord == null){
+    public void removeActivityRecord(ActivityRecord activityRecord) {
+        if (activityRecord == null)
             throw new IllegalArgumentException("Activity record must not be null");
-        }
-        if(!activityRecords.contains(activityRecord)) return;
+        if (!activityRecords.contains(activityRecord))
+            return;
+        if (activityRecord.getTrainee() != this)
+            throw new IllegalArgumentException("Activity record is assigned to different trainee");
         activityRecords.remove(activityRecord);
         ActivityRecord.delete(activityRecord);
     }
 
-    public static void delete(Trainee trainee){
-        if(trainee == null){
+    public static void delete(Trainee trainee) {
+        if (trainee == null) {
             throw new IllegalArgumentException("Trainee must not be null");
         }
         Set<ActivityRecord> activityRecordSeTmp = Set.copyOf(trainee.activityRecords);

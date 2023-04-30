@@ -23,7 +23,7 @@ public class Member {
     }
 
     public void setName(String name) {
-        if(name == null){
+        if (name == null) {
             throw new IllegalArgumentException("Name must not be null");
         }
         this.name = name;
@@ -33,32 +33,35 @@ public class Member {
         return Collections.unmodifiableMap(councils);
     }
 
-    public void addCouncil(Council council){
-        if(council == null){
+    public void addCouncil(Council council) {
+        if (council == null) {
             throw new IllegalArgumentException("Council must not be null");
         }
-        if(councils.containsKey(council.getName())) return;
+        if (councils.containsKey(council.getName())) return;
         councils.put(council.getName(), council);
         council.addMember(this);
     }
 
-    public void removeCouncil(Council council){
-        if(council == null){
+    public void removeCouncil(Council council) {
+        if (council == null) {
             throw new IllegalArgumentException("Council must not be null");
         }
-        if(!councils.containsKey(council.getName())) return;
+        if (!councils.containsKey(council.getName())) return;
         councils.remove(council.getName());
         council.removeMember(this);
     }
 
-    public Optional<Council> councilByName(String name){
-        if(name == null){
+    public Optional<Council> councilByName(String name) {
+        if (name == null) {
             throw new IllegalArgumentException("Team Name must not be null");
         }
         return Optional.ofNullable(councils.get(name));
     }
 
-    public static void delete(Member member){
+    public static void delete(Member member) {
+        if (member == null)
+            throw new IllegalArgumentException("member must not be null");
+
         Map<String, Council> counciltemp = Map.copyOf(member.councils);
         member.councils.clear();
         counciltemp.forEach((x, council) -> council.removeMember(member));

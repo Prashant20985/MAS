@@ -21,15 +21,6 @@ public class Student {
         extent.add(this);
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
-
     public int getId() {
         return id;
     }
@@ -43,7 +34,7 @@ public class Student {
     }
 
     public void setFirstName(String firstName) {
-        if(firstName == null){
+        if (firstName == null) {
             throw new IllegalArgumentException("Firstname cannot be null");
         }
         this.firstName = firstName;
@@ -54,7 +45,7 @@ public class Student {
     }
 
     public void setLastName(String lastName) {
-        if(lastName == null){
+        if (lastName == null) {
             throw new IllegalArgumentException("Lastname cannot be null");
         }
         this.lastName = lastName;
@@ -64,21 +55,21 @@ public class Student {
         return Collections.unmodifiableSet(groups);
     }
 
-    public void addGroup(Group group){
-        if(group == null){
+    public void addGroup(Group group) {
+        if (group == null) {
             throw new IllegalArgumentException("Group must me null");
         }
-        if(groups.contains(group)) return;
+        if (groups.contains(group)) return;
 
         groups.add(group);
         group.addStudent(this);
     }
 
-    public void removeGroup(Group group){
-        if(group == null){
+    public void removeGroup(Group group) {
+        if (group == null) {
             throw new IllegalArgumentException("Group must not be null");
         }
-        if(!groups.contains(group)) return;
+        if (!groups.contains(group)) return;
         groups.remove(group);
         group.removeStudent(this);
     }
@@ -87,8 +78,8 @@ public class Student {
         return Collections.unmodifiableSet(extent);
     }
 
-    public static void delete(Student student){
-        if(student == null){
+    public static void delete(Student student) {
+        if (student == null) {
             throw new IllegalArgumentException("Student must not be null");
         }
         Set<Group> groupTemp = Set.copyOf(student.groups);

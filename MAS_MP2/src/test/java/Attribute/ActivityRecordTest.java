@@ -15,11 +15,11 @@ public class ActivityRecordTest {
     private Trainee trainee2;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         activity = new Activity("Activity 1");
         activity2 = new Activity("Activity 2");
-        trainee = new Trainee("Prashant","Sharma");
-        trainee2 = new Trainee("Prashant2","Sharma2");
+        trainee = new Trainee("Prashant", "Sharma");
+        trainee2 = new Trainee("Prashant2", "Sharma2");
         activityRecord = new ActivityRecord("01-01-2023", "01-02-2023", activity, trainee);
         activityRecord2 = new ActivityRecord("01-01-2023", "01-02-2023", activity2, trainee2);
     }

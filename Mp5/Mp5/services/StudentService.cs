@@ -8,7 +8,7 @@ using Mp5.models;
 
 namespace Mp5.services
 {
-    public interface IStudentService
+    internal interface IStudentService
     {
         Task<string> AddStudent(StudentDTO student);
         Task<List<StudentDTO>> GetStudents();
@@ -31,11 +31,10 @@ namespace Mp5.services
         public async Task<string> AddStudent(StudentDTO student)
         {
             var checkEmail = await _context.People.AnyAsync(x => x.Email == student.Email);
+
             if (checkEmail)
-            {
                 return $"email: {student.Email} is already taken";
-            }
-                
+
 
             var newStudent = new Student
             {

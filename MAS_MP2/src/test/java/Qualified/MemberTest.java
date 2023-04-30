@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class MemberTest {
 
     @Test
-    public void addMember(){
+    public void addMember() {
         Council council1 = new Council("council1");
         Member member1 = new Member("member1");
         Member member2 = new Member("member2");
@@ -20,8 +20,9 @@ public class MemberTest {
         assertEquals(1, member1.getCouncils().size());
         assertEquals(1, member2.getCouncils().size());
     }
+
     @Test
-    public void removeMember(){
+    public void removeMember() {
         Council council1 = new Council("council1");
         Member member1 = new Member("member1");
         Member member2 = new Member("member2");

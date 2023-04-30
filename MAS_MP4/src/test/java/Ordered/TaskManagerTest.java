@@ -74,7 +74,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void testFindByPrority(){
+    public void testFindByPriority(){
         Task task1 = new Task("Task 1", "Test task1", 1, LocalDate.now());
         Task task2 = new Task("Task 2", "Test task2", 2, LocalDate.now().plusDays(1));
         Task task3 = new Task("Another one", "Test task3", 1, LocalDate.now().plusDays(2));

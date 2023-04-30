@@ -11,8 +11,6 @@ public class Person {
     private String lastName;
     private int age;
 
-    private int MAX_USERNAME_LENGTH = 10;
-
     public Person(String userName, String firstName, String lastName, int age) {
         setFirstName(firstName);
         setLastName(lastName);
@@ -25,9 +23,10 @@ public class Person {
     }
 
     public void setUserName(String userName) {
-        if(userName == null || userName.isEmpty()){
+        if(userName == null || userName.isBlank()){
             throw new IllegalArgumentException("User name must not be blank or null");
         }
+        int MAX_USERNAME_LENGTH = 10;
         if(userName.length() > MAX_USERNAME_LENGTH){
             throw new IllegalArgumentException("User name should not exceed the max limit");
         }
@@ -39,7 +38,7 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        if(firstName == null || firstName.isEmpty()){
+        if(firstName == null || firstName.isBlank()){
             throw new IllegalArgumentException("firstName must not be blank or null");
         }
         this.firstName = firstName;
