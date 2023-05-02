@@ -50,6 +50,9 @@ public class Trainee {
         if (activityRecord == null) {
             throw new IllegalArgumentException("Activity record must not be null");
         }
+        if (activityRecord.getTrainee() != this)
+            throw new IllegalArgumentException("Activity record is assigned to different record");
+
         if (activityRecords.contains(activityRecord)) return;
         activityRecords.add(activityRecord);
     }
@@ -59,8 +62,6 @@ public class Trainee {
             throw new IllegalArgumentException("Activity record must not be null");
         if (!activityRecords.contains(activityRecord))
             return;
-        if (activityRecord.getTrainee() != this)
-            throw new IllegalArgumentException("Activity record is assigned to different trainee");
         activityRecords.remove(activityRecord);
         ActivityRecord.delete(activityRecord);
     }
@@ -69,6 +70,7 @@ public class Trainee {
         if (trainee == null) {
             throw new IllegalArgumentException("Trainee must not be null");
         }
+
         Set<ActivityRecord> activityRecordSeTmp = Set.copyOf(trainee.activityRecords);
         trainee.activityRecords.clear();
         activityRecordSeTmp.forEach(ActivityRecord::delete);
