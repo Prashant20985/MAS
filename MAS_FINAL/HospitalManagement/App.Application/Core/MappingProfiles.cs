@@ -16,6 +16,8 @@ namespace App.Application.Core
             CreateMap<Domain.Models.Appointment, AppointmentDTO>()
                 .ForMember(d => d.RoomNumber, o => o.MapFrom(s => s.Room.RoomNumber))
                 .ForMember(d => d.ProcedureTitle, o => o.MapFrom(s => s.Procedures.Select(x => x.ProcedureType.Title)));
+
+            CreateMap<Domain.Models.Room, RoomDTO>();
         }
     }
 }
