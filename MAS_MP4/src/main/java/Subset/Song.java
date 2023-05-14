@@ -1,6 +1,6 @@
 package Subset;
 
-public class Song implements Comparable<Song>{
+public class Song implements Comparable<Song> {
 
     private String title;
     private String artist;
@@ -17,7 +17,7 @@ public class Song implements Comparable<Song>{
     }
 
     public void setTitle(String title) {
-        if(title == null || title.isEmpty()){
+        if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Title must not be blank or empty");
         }
         this.title = title;
@@ -28,7 +28,7 @@ public class Song implements Comparable<Song>{
     }
 
     public void setArtist(String artist) {
-        if(artist == null || artist.isEmpty()){
+        if (artist == null || artist.isBlank()) {
             throw new IllegalArgumentException("artist must not be blank or empty");
         }
         this.artist = artist;

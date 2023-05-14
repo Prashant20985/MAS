@@ -4,17 +4,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class TaskManager {
-    private static List<Task> tasks;
+    private final List<Task> tasks = new ArrayList<>();
 
-    public TaskManager(){
-        tasks = new ArrayList<>();
-    }
 
     public void addTask(Task task){
         if(task == null){
             throw new IllegalArgumentException("Task must not be null");
         }
+        if (tasks.contains(task)){
+            throw new IllegalArgumentException("Task already exists");
+        }
         tasks.add(task);
+        Collections.sort(tasks);
     }
 
     public void removeTask(Task task){

@@ -24,11 +24,11 @@ public class SubsetTest {
 
         playlist.removeSong(song1);
         assertEquals(1, playlist.getSongs().size());
-        assertTrue(!playlist.getSongs().contains(song1));
+        assertFalse(playlist.getSongs().contains(song1));
 
         playlist.removeSong(song2);
         assertEquals(0, playlist.getSongs().size());
-        assertTrue(!playlist.getSongs().contains(song2));
+        assertFalse(playlist.getSongs().contains(song2));
     }
 
     @Test

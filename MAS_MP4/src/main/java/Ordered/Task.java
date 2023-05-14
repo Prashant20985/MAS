@@ -1,7 +1,5 @@
 package Ordered;
 
-import sun.util.resources.LocaleData;
-
 import java.time.LocalDate;
 
 public class Task implements Comparable<Task>{
@@ -25,7 +23,7 @@ public class Task implements Comparable<Task>{
     }
 
     public void setTitle(String title) {
-        if(title == null || title.isEmpty()){
+        if(title == null || title.isBlank()){
             throw new IllegalArgumentException("Title must not be empty");
         }
         this.title = title;
@@ -36,7 +34,7 @@ public class Task implements Comparable<Task>{
     }
 
     public void setDescription(String description) {
-        if(description == null || description.isEmpty()){
+        if(description == null || description.isBlank()){
             throw new IllegalArgumentException("description must not be empty");
         }
         this.description = description;

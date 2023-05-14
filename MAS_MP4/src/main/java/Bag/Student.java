@@ -20,7 +20,7 @@ public class Student {
     }
 
     public void setFirstName(String firstName) {
-        if(firstName == null || firstName.isEmpty()){
+        if(firstName == null || firstName.isBlank()){
             throw new IllegalArgumentException("firstName should not be null or empty");
         }
         this.firstName = firstName;
@@ -31,7 +31,7 @@ public class Student {
     }
 
     public void setLastName(String lastName) {
-        if(lastName == null || lastName.isEmpty()){
+        if(lastName == null || lastName.isBlank()){
             throw new IllegalArgumentException("lastName should not be null or empty");
         }
         this.lastName = lastName;

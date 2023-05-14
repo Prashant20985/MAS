@@ -18,7 +18,7 @@ public class Playlist {
     }
 
     public void setName(String name) {
-        if(name == null || name.isEmpty()){
+        if(name == null || name.isBlank()){
             throw new IllegalArgumentException("Playlist name must not be null or Empty");
         }
         this.name = name;
@@ -35,7 +35,7 @@ public class Playlist {
             throw new IllegalArgumentException("Song must not be null");
 
         if(songs.contains(song)){
-            throw new IllegalArgumentException("So is already present");
+            throw new IllegalArgumentException("Song is already present");
         }
         songs.add(song);
     }
@@ -45,7 +45,7 @@ public class Playlist {
             throw new IllegalArgumentException("Song must not be null");
 
         if(!songs.contains(song)){
-            throw new IllegalArgumentException("So is not present");
+            throw new IllegalArgumentException("Song is not present");
         }
         songs.remove(song);
     }

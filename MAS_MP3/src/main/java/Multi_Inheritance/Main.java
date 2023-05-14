@@ -2,31 +2,32 @@ package Multi_Inheritance;
 
 public class Main {
     public static void main(String[] args) {
-        Circle circle = new Circle("Circle", 5);
-        Rectangle rectangle = new Rectangle("Rectangle", 4, 6);
-        Sphere sphere = new Sphere("Sphere", 4);
-        Cube cube = new Cube("Cube", 4);
+        ElectricCar electricCar = new ElectricCar("Car 1", 2022, 80);
+        GasolineCar gasolineCar = new GasolineCar("Car 2", 2023, 35);
+        HybridCar hybridCar = new HybridCar("Car 3", 2023, 25, 75);
 
-        // call methods on Circle
-        System.out.println(circle.getName());
-        System.out.println(circle.getArea());
-        System.out.println(circle.getParameter());
+        System.out.println("electricCar = " + electricCar);
+        System.out.println("gasolineCar = " + gasolineCar);
+        System.out.println("hybridCar = " + hybridCar);
 
-        // call methods on Rectangle
-        System.out.println(rectangle.getName());
-        System.out.println(rectangle.getArea());
-        System.out.println(rectangle.getParameter());
+        System.out.println();
 
-        // call methods on Sphere
-        System.out.println(sphere.getName());
-        System.out.println(sphere.getArea());
-        System.out.println(sphere.getSurfaceArea());
-        System.out.println(sphere.getVolume());
+        System.out.println(electricCar.getModel());
+        electricCar.chargeBattery(20);
+        electricCar.driveElectric(80);
 
-        // call methods on Cube
-        System.out.println(cube.getName());
-        System.out.println(cube.getArea());
-        System.out.println(cube.getSurfaceArea());
-        System.out.println(cube.getVolume());
+        System.out.println();
+
+        System.out.println(gasolineCar.getModel());
+        gasolineCar.refillFuel(5);
+        gasolineCar.driveGasoline(30);
+
+        System.out.println();
+
+        System.out.println(hybridCar.getModel());
+        hybridCar.chargeBattery(10);
+        hybridCar.driveElectric(20);
+        hybridCar.refillFuel(10);
+        hybridCar.driveGasoline(25);
     }
 }
