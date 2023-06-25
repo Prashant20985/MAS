@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Domain.Models
 {
@@ -8,9 +13,10 @@ namespace App.Domain.Models
     {
         [Key]
         public int CertificationId { get; set; }
-        [Required, MaxLength(100)]
+
+        [Required]
         public string Title { get; set; }
 
-        public ICollection<Nurse> Nurses { get; set; } = new HashSet<Nurse>();
+        public List<Nurse_Certification> Nurse_Certifications { get; set; } = new List<Nurse_Certification>();
     }
 }

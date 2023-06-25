@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Domain.Models
 {
@@ -9,14 +14,13 @@ namespace App.Domain.Models
         [Key]
         public int TreatmentId { get; set; }
 
-        [Required, MaxLength(30)]
+        [Required,MaxLength(50, ErrorMessage = "Max Length is 50")]
         public string Title { get; set; }
 
         [ForeignKey(nameof(Diagnosis))]
         public int DiagnosisId { get; set; }
         public Diagnosis Diagnosis { get; set; }
 
-        public ICollection<Procedure> Procedures { get; set; } = new HashSet<Procedure>();
-
+        public List<Procedure> procedures { get; set; } = new List<Procedure>();
     }
 }

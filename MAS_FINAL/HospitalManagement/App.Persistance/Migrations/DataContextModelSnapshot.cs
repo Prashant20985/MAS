@@ -3,7 +3,6 @@ using System;
 using App.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -16,44 +15,67 @@ namespace App.Persistance.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.Entity("App.Domain.Models.Allergy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Allergies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "qwer"
+                        });
+                });
 
             modelBuilder.Entity("App.Domain.Models.Appointment", b =>
                 {
                     b.Property<int>("AppointmentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
+                    b.Property<float>("AppointmentCost")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("DoctorId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("NurseId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("RoomId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Status")
+                        .HasColumnType("varchar(32)");
 
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("NurseId");
+
+                    b.HasIndex("PatientId");
 
                     b.HasIndex("RoomId");
 
@@ -63,22 +85,38 @@ namespace App.Persistance.Migrations
                         new
                         {
                             AppointmentId = 1,
+                            AppointmentCost = 120f,
                             DoctorId = 1,
                             EndTime = new DateTime(2022, 1, 1, 11, 30, 0, 0, DateTimeKind.Unspecified),
                             NurseId = 3,
+                            PatientId = 5,
                             RoomId = 1,
                             StartTime = new DateTime(2022, 1, 1, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = "BOOKED"
+                            Status = 0
                         },
                         new
                         {
                             AppointmentId = 2,
+                            AppointmentCost = 100f,
                             DoctorId = 2,
                             EndTime = new DateTime(2023, 5, 7, 13, 30, 0, 0, DateTimeKind.Unspecified),
                             NurseId = 4,
+                            PatientId = 6,
                             RoomId = 2,
                             StartTime = new DateTime(2023, 5, 7, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = "AVAILABLE"
+                            Status = 2
+                        },
+                        new
+                        {
+                            AppointmentId = 3,
+                            AppointmentCost = 100f,
+                            DoctorId = 2,
+                            EndTime = new DateTime(2023, 5, 7, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 4,
+                            PatientId = 5,
+                            RoomId = 2,
+                            StartTime = new DateTime(2023, 5, 7, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            Status = 2
                         });
                 });
 
@@ -86,14 +124,11 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("CertificationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CertificationId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("CertificationId");
 
@@ -116,14 +151,15 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("DiagnosisId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DiagnosisId"));
+                    b.Property<DateTime>("DateDiagnosed")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("DiagnosisId");
 
@@ -133,12 +169,41 @@ namespace App.Persistance.Migrations
                         new
                         {
                             DiagnosisId = 1,
+                            DateDiagnosed = new DateTime(2022, 1, 1, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             Title = "Kemo"
                         },
                         new
                         {
                             DiagnosisId = 2,
+                            DateDiagnosed = new DateTime(2022, 1, 1, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             Title = "ECG"
+                        });
+                });
+
+            modelBuilder.Entity("App.Domain.Models.Doctor_Specialization", b =>
+                {
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SpecializationId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("DoctorId", "SpecializationId");
+
+                    b.HasIndex("SpecializationId");
+
+                    b.ToTable("Doctor_Specialization");
+
+                    b.HasData(
+                        new
+                        {
+                            DoctorId = 1,
+                            SpecializationId = 1
+                        },
+                        new
+                        {
+                            DoctorId = 2,
+                            SpecializationId = 2
                         });
                 });
 
@@ -146,17 +211,15 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("EquipmentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EquipmentId"));
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("PricePerProcedure")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("EquipmentId");
 
@@ -166,13 +229,13 @@ namespace App.Persistance.Migrations
                         new
                         {
                             EquipmentId = 1,
-                            Price = 100.99m,
+                            PricePerProcedure = 100.99f,
                             Title = "Surgery"
                         },
                         new
                         {
                             EquipmentId = 2,
-                            Price = 80.99m,
+                            PricePerProcedure = 80.99f,
                             Title = "PostMortem"
                         });
                 });
@@ -181,14 +244,18 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("ExaminationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExaminationId"));
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ExaminationTypeId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("ExaminationId");
+
+                    b.HasIndex("AppointmentId")
+                        .IsUnique();
 
                     b.HasIndex("ExaminationTypeId");
 
@@ -198,39 +265,14 @@ namespace App.Persistance.Migrations
                         new
                         {
                             ExaminationId = 1,
+                            AppointmentId = 1,
                             ExaminationTypeId = 1
                         },
                         new
                         {
                             ExaminationId = 2,
+                            AppointmentId = 2,
                             ExaminationTypeId = 2
-                        });
-                });
-
-            modelBuilder.Entity("App.Domain.Models.ExaminationDiagnosis", b =>
-                {
-                    b.Property<int>("DiagnosisId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExaminationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DiagnosisId", "ExaminationId");
-
-                    b.HasIndex("ExaminationId");
-
-                    b.ToTable("ExaminationDiagnosis");
-
-                    b.HasData(
-                        new
-                        {
-                            DiagnosisId = 1,
-                            ExaminationId = 1
-                        },
-                        new
-                        {
-                            DiagnosisId = 2,
-                            ExaminationId = 2
                         });
                 });
 
@@ -238,14 +280,12 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("ExaminationTypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExaminationTypeId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ExaminationTypeId");
 
@@ -264,23 +304,47 @@ namespace App.Persistance.Migrations
                         });
                 });
 
+            modelBuilder.Entity("App.Domain.Models.Examination_Diagnosis", b =>
+                {
+                    b.Property<int>("DiagnosisId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ExaminationId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("DiagnosisId", "ExaminationId");
+
+                    b.HasIndex("ExaminationId");
+
+                    b.ToTable("Examination_Diagnosis");
+
+                    b.HasData(
+                        new
+                        {
+                            DiagnosisId = 1,
+                            ExaminationId = 1
+                        },
+                        new
+                        {
+                            DiagnosisId = 2,
+                            ExaminationId = 2
+                        });
+                });
+
             modelBuilder.Entity("App.Domain.Models.Medicine", b =>
                 {
                     b.Property<int>("MedicineId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MedicineId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Amount")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("MedicineType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("MedicineType")
+                        .HasColumnType("varchar(32)");
 
                     b.Property<int>("ProcedureId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("MedicineId");
 
@@ -293,15 +357,79 @@ namespace App.Persistance.Migrations
                         {
                             MedicineId = 1,
                             Amount = 10,
-                            MedicineType = "CAPSULE",
+                            MedicineType = 0,
                             ProcedureId = 1
                         },
                         new
                         {
                             MedicineId = 2,
                             Amount = 5,
-                            MedicineType = "LIQUID",
+                            MedicineType = 1,
                             ProcedureId = 2
+                        });
+                });
+
+            modelBuilder.Entity("App.Domain.Models.Nurse_Certification", b =>
+                {
+                    b.Property<int>("NurseId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CertificationId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("NurseId", "CertificationId");
+
+                    b.HasIndex("CertificationId");
+
+                    b.ToTable("Nurse_Certification");
+
+                    b.HasData(
+                        new
+                        {
+                            NurseId = 3,
+                            CertificationId = 1
+                        },
+                        new
+                        {
+                            NurseId = 4,
+                            CertificationId = 1
+                        },
+                        new
+                        {
+                            NurseId = 4,
+                            CertificationId = 2
+                        });
+                });
+
+            modelBuilder.Entity("App.Domain.Models.PatientAllergy", b =>
+                {
+                    b.Property<int>("AllergyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AllergyId1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("PatientPersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AllergyId", "PatientId");
+
+                    b.HasIndex("AllergyId1");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("PatientPersonId");
+
+                    b.ToTable("PatientAllergy", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            AllergyId = 1,
+                            PatientId = 5
                         });
                 });
 
@@ -309,54 +437,61 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("PersonId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(6)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("varchar(32)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("PersonId");
 
-                    b.ToTable("Person");
+                    b.ToTable("People");
 
-                    b.UseTptMappingStrategy();
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("App.Domain.Models.Procedure", b =>
                 {
                     b.Property<int>("ProcedureId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProcedureId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("MedicineId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ProcedureTypeId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TreatmentId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("ProcedureId");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("AppointmentId")
+                        .IsUnique();
+
+                    b.HasIndex("MedicineId");
 
                     b.HasIndex("ProcedureTypeId");
 
@@ -385,14 +520,12 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("ProcedureTypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProcedureTypeId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ProcedureTypeId");
 
@@ -414,14 +547,14 @@ namespace App.Persistance.Migrations
             modelBuilder.Entity("App.Domain.Models.Procedure_Equipment", b =>
                 {
                     b.Property<int>("EquipmentId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("ProceureId")
-                        .HasColumnType("int");
+                    b.Property<int>("ProcedureId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasKey("EquipmentId", "ProceureId");
+                    b.HasKey("EquipmentId", "ProcedureId");
 
-                    b.HasIndex("ProceureId");
+                    b.HasIndex("ProcedureId");
 
                     b.ToTable("Procedure_Equipment");
 
@@ -429,12 +562,12 @@ namespace App.Persistance.Migrations
                         new
                         {
                             EquipmentId = 1,
-                            ProceureId = 1
+                            ProcedureId = 1
                         },
                         new
                         {
                             EquipmentId = 2,
-                            ProceureId = 2
+                            ProcedureId = 2
                         });
                 });
 
@@ -442,14 +575,12 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("RoomId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("RoomNumber")
                         .IsRequired()
                         .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("RoomId");
 
@@ -470,30 +601,26 @@ namespace App.Persistance.Migrations
 
             modelBuilder.Entity("App.Domain.Models.Specialization", b =>
                 {
-                    b.Property<int>("SecializationId")
+                    b.Property<int>("SpecializationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SecializationId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("SecializationId");
+                    b.HasKey("SpecializationId");
 
                     b.ToTable("Specialization");
 
                     b.HasData(
                         new
                         {
-                            SecializationId = 1,
+                            SpecializationId = 1,
                             Title = "Dentistry"
                         },
                         new
                         {
-                            SecializationId = 2,
+                            SpecializationId = 2,
                             Title = "Cardiology"
                         });
                 });
@@ -502,17 +629,15 @@ namespace App.Persistance.Migrations
                 {
                     b.Property<int>("TreatmentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TreatmentId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("DiagnosisId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("TreatmentId");
 
@@ -539,45 +664,44 @@ namespace App.Persistance.Migrations
                 {
                     b.HasBaseType("App.Domain.Models.Person");
 
-                    b.Property<decimal>("ratePerHour")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("MonthlySalary")
+                        .HasColumnType("REAL");
 
-                    b.ToTable("Medical_Staff");
+                    b.Property<float>("RatePerHour")
+                        .HasColumnType("REAL");
+
+                    b.HasDiscriminator().HasValue("MedicalStaff");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Patient", b =>
                 {
                     b.HasBaseType("App.Domain.Models.Person");
 
-                    b.Property<int>("DiagnosisId")
-                        .HasColumnType("int");
-
                     b.Property<long>("InsuranceNumber")
-                        .HasColumnType("bigint");
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("DiagnosisId");
+                    b.HasIndex("InsuranceNumber")
+                        .IsUnique();
 
-                    b.ToTable("Patient");
+                    b.HasDiscriminator().HasValue("Patient");
 
                     b.HasData(
                         new
                         {
                             PersonId = 5,
-                            DateOfBirth = new DateTime(2002, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(2002, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Victor",
-                            Gender = "MALE",
+                            Gender = 0,
                             LastName = "Stone",
-                            DiagnosisId = 1,
                             InsuranceNumber = 12365478L
                         },
                         new
                         {
                             PersonId = 6,
-                            DateOfBirth = new DateTime(2002, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(2002, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Arthur",
-                            Gender = "FEMALE",
+                            Gender = 1,
                             LastName = "Curry",
-                            DiagnosisId = 2,
                             InsuranceNumber = 12365008L
                         });
                 });
@@ -586,12 +710,10 @@ namespace App.Persistance.Migrations
                 {
                     b.HasBaseType("App.Domain.Models.MedicalStaff");
 
-                    b.Property<int>("SpecializationId")
-                        .HasColumnType("int");
+                    b.Property<float>("BonusPerAppointment")
+                        .HasColumnType("REAL");
 
-                    b.HasIndex("SpecializationId");
-
-                    b.ToTable("Doctor");
+                    b.HasDiscriminator().HasValue("Doctor");
 
                     b.HasData(
                         new
@@ -599,20 +721,22 @@ namespace App.Persistance.Migrations
                             PersonId = 1,
                             DateOfBirth = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Bruce",
-                            Gender = "MALE",
+                            Gender = 0,
                             LastName = "Wayne",
-                            ratePerHour = 100.00m,
-                            SpecializationId = 1
+                            MonthlySalary = 16000f,
+                            RatePerHour = 100f,
+                            BonusPerAppointment = 10f
                         },
                         new
                         {
                             PersonId = 2,
-                            DateOfBirth = new DateTime(1999, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(1999, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Clark",
-                            Gender = "MALE",
+                            Gender = 0,
                             LastName = "Kent",
-                            ratePerHour = 150.99m,
-                            SpecializationId = 2
+                            MonthlySalary = 24158.4f,
+                            RatePerHour = 150.99f,
+                            BonusPerAppointment = 0f
                         });
                 });
 
@@ -620,33 +744,28 @@ namespace App.Persistance.Migrations
                 {
                     b.HasBaseType("App.Domain.Models.MedicalStaff");
 
-                    b.Property<int>("CertificationId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("CertificationId");
-
-                    b.ToTable("Nurse");
+                    b.HasDiscriminator().HasValue("Nurse");
 
                     b.HasData(
                         new
                         {
                             PersonId = 3,
-                            DateOfBirth = new DateTime(1998, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(1998, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Dianna",
-                            Gender = "FEMALE",
+                            Gender = 1,
                             LastName = "Price",
-                            ratePerHour = 90.99m,
-                            CertificationId = 1
+                            MonthlySalary = 14558.399f,
+                            RatePerHour = 90.99f
                         },
                         new
                         {
                             PersonId = 4,
-                            DateOfBirth = new DateTime(1998, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(1998, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Barry",
-                            Gender = "MALE",
+                            Gender = 0,
                             LastName = "Allen",
-                            ratePerHour = 90.99m,
-                            CertificationId = 2
+                            MonthlySalary = 14558.399f,
+                            RatePerHour = 90.99f
                         });
                 });
 
@@ -664,6 +783,12 @@ namespace App.Persistance.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("App.Domain.Models.Patient", "Patient")
+                        .WithMany("Appointments")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("App.Domain.Models.Room", "Room")
                         .WithMany("Appointments")
                         .HasForeignKey("RoomId")
@@ -674,30 +799,59 @@ namespace App.Persistance.Migrations
 
                     b.Navigation("Nurse");
 
+                    b.Navigation("Patient");
+
                     b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("App.Domain.Models.Doctor_Specialization", b =>
+                {
+                    b.HasOne("App.Domain.Models.Doctor", "Doctor")
+                        .WithMany("Doctor_Specializations")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Models.Specialization", "Specialization")
+                        .WithMany("Doctor_Specializations")
+                        .HasForeignKey("SpecializationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Examination", b =>
                 {
+                    b.HasOne("App.Domain.Models.Appointment", "Appointment")
+                        .WithOne("Examination")
+                        .HasForeignKey("App.Domain.Models.Examination", "AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("App.Domain.Models.ExaminationType", "ExaminationType")
                         .WithMany("Examinations")
                         .HasForeignKey("ExaminationTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Appointment");
+
                     b.Navigation("ExaminationType");
                 });
 
-            modelBuilder.Entity("App.Domain.Models.ExaminationDiagnosis", b =>
+            modelBuilder.Entity("App.Domain.Models.Examination_Diagnosis", b =>
                 {
                     b.HasOne("App.Domain.Models.Diagnosis", "Diagnosis")
-                        .WithMany("ExaminationDiagnoses")
+                        .WithMany("Examination_Diagnoses")
                         .HasForeignKey("DiagnosisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("App.Domain.Models.Examination", "Examination")
-                        .WithMany("ExaminationDiagnoses")
+                        .WithMany("Examination_Diagnoses")
                         .HasForeignKey("ExaminationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -718,13 +872,63 @@ namespace App.Persistance.Migrations
                     b.Navigation("Procedure");
                 });
 
+            modelBuilder.Entity("App.Domain.Models.Nurse_Certification", b =>
+                {
+                    b.HasOne("App.Domain.Models.Certification", "Certification")
+                        .WithMany("Nurse_Certifications")
+                        .HasForeignKey("CertificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Models.Nurse", "Nurse")
+                        .WithMany("Nurse_Certifications")
+                        .HasForeignKey("NurseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Certification");
+
+                    b.Navigation("Nurse");
+                });
+
+            modelBuilder.Entity("App.Domain.Models.PatientAllergy", b =>
+                {
+                    b.HasOne("App.Domain.Models.Allergy", null)
+                        .WithMany()
+                        .HasForeignKey("AllergyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Models.Allergy", "Allergy")
+                        .WithMany()
+                        .HasForeignKey("AllergyId1");
+
+                    b.HasOne("App.Domain.Models.Patient", null)
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientPersonId");
+
+                    b.Navigation("Allergy");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("App.Domain.Models.Procedure", b =>
                 {
                     b.HasOne("App.Domain.Models.Appointment", "Appointment")
-                        .WithMany("Procedures")
-                        .HasForeignKey("AppointmentId")
+                        .WithOne("Procedure")
+                        .HasForeignKey("App.Domain.Models.Procedure", "AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("App.Domain.Models.Medicine", null)
+                        .WithMany("Procedures")
+                        .HasForeignKey("MedicineId");
 
                     b.HasOne("App.Domain.Models.ProcedureType", "ProcedureType")
                         .WithMany("Procedures")
@@ -733,7 +937,7 @@ namespace App.Persistance.Migrations
                         .IsRequired();
 
                     b.HasOne("App.Domain.Models.Treatment", "Treatment")
-                        .WithMany("Procedures")
+                        .WithMany("procedures")
                         .HasForeignKey("TreatmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -755,7 +959,7 @@ namespace App.Persistance.Migrations
 
                     b.HasOne("App.Domain.Models.Procedure", "Procedure")
                         .WithMany("Procedure_Equipment")
-                        .HasForeignKey("ProceureId")
+                        .HasForeignKey("ProcedureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -775,81 +979,21 @@ namespace App.Persistance.Migrations
                     b.Navigation("Diagnosis");
                 });
 
-            modelBuilder.Entity("App.Domain.Models.MedicalStaff", b =>
-                {
-                    b.HasOne("App.Domain.Models.Person", null)
-                        .WithOne()
-                        .HasForeignKey("App.Domain.Models.MedicalStaff", "PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("App.Domain.Models.Patient", b =>
-                {
-                    b.HasOne("App.Domain.Models.Diagnosis", "Diagnosis")
-                        .WithMany("Patients")
-                        .HasForeignKey("DiagnosisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("App.Domain.Models.Person", null)
-                        .WithOne()
-                        .HasForeignKey("App.Domain.Models.Patient", "PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Diagnosis");
-                });
-
-            modelBuilder.Entity("App.Domain.Models.Doctor", b =>
-                {
-                    b.HasOne("App.Domain.Models.MedicalStaff", null)
-                        .WithOne()
-                        .HasForeignKey("App.Domain.Models.Doctor", "PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("App.Domain.Models.Specialization", "Specialization")
-                        .WithMany("Doctors")
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Specialization");
-                });
-
-            modelBuilder.Entity("App.Domain.Models.Nurse", b =>
-                {
-                    b.HasOne("App.Domain.Models.Certification", "Cerification")
-                        .WithMany("Nurses")
-                        .HasForeignKey("CertificationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("App.Domain.Models.MedicalStaff", null)
-                        .WithOne()
-                        .HasForeignKey("App.Domain.Models.Nurse", "PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cerification");
-                });
-
             modelBuilder.Entity("App.Domain.Models.Appointment", b =>
                 {
-                    b.Navigation("Procedures");
+                    b.Navigation("Examination");
+
+                    b.Navigation("Procedure");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Certification", b =>
                 {
-                    b.Navigation("Nurses");
+                    b.Navigation("Nurse_Certifications");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Diagnosis", b =>
                 {
-                    b.Navigation("ExaminationDiagnoses");
-
-                    b.Navigation("Patients");
+                    b.Navigation("Examination_Diagnoses");
 
                     b.Navigation("Treatments");
                 });
@@ -861,12 +1005,17 @@ namespace App.Persistance.Migrations
 
             modelBuilder.Entity("App.Domain.Models.Examination", b =>
                 {
-                    b.Navigation("ExaminationDiagnoses");
+                    b.Navigation("Examination_Diagnoses");
                 });
 
             modelBuilder.Entity("App.Domain.Models.ExaminationType", b =>
                 {
                     b.Navigation("Examinations");
+                });
+
+            modelBuilder.Entity("App.Domain.Models.Medicine", b =>
+                {
+                    b.Navigation("Procedures");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Procedure", b =>
@@ -888,22 +1037,31 @@ namespace App.Persistance.Migrations
 
             modelBuilder.Entity("App.Domain.Models.Specialization", b =>
                 {
-                    b.Navigation("Doctors");
+                    b.Navigation("Doctor_Specializations");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Treatment", b =>
                 {
-                    b.Navigation("Procedures");
+                    b.Navigation("procedures");
+                });
+
+            modelBuilder.Entity("App.Domain.Models.Patient", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Doctor", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Doctor_Specializations");
                 });
 
             modelBuilder.Entity("App.Domain.Models.Nurse", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Nurse_Certifications");
                 });
 #pragma warning restore 612, 618
         }

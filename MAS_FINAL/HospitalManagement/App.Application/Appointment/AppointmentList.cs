@@ -30,6 +30,7 @@ namespace App.Application.Appointment
                 var appointments = await _context.Appointments
                     .Where(x => x.DoctorId == request.DoctorId)
                     .ProjectTo<AppointmentDTO>(_mapper.ConfigurationProvider)
+                    .OrderBy(x => x.StartTime)
                     .ToListAsync(cancellationToken);
 
                 return Result<List<AppointmentDTO>>.Success(appointments);

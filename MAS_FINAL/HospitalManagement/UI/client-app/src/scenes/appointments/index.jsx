@@ -3,7 +3,7 @@ import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { useEffect } from "react";
 import { useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useNavigate, useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -95,6 +95,12 @@ function AppointmentList() {
       minWidth: 100,
     },
     {
+      field: "nurseName",
+      headerName: "Nurse Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
       field: "roomNumber",
       headerName: "Room Number",
       flex: 1,
@@ -103,6 +109,18 @@ function AppointmentList() {
     {
       field: "procedureTitle",
       headerName: "Procedure Title",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "examinationType",
+      headerName: "Examination Type",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "totalCost",
+      headerName: "Cost",
       flex: 1,
       cellClassName: "name-column--cell",
     },
@@ -183,11 +201,7 @@ function AppointmentList() {
         />
       )}
       <Box
-        marginTop="40px"
-        marginLeft="70px"
-        marginRight="80px"
-        display="flex"
-        alignItems="center"
+        m="40px 0 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -213,6 +227,9 @@ function AppointmentList() {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
         {!loadingAppointment && (
@@ -220,6 +237,7 @@ function AppointmentList() {
             rows={appointments}
             columns={columns}
             getRowId={(row) => row.appointmentId}
+            components={{ Toolbar: GridToolbar }}
           />
         )}
       </Box>

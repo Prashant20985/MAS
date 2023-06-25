@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Domain.Models
 {
@@ -9,9 +14,9 @@ namespace App.Domain.Models
         [Key]
         public int ExaminationTypeId { get; set; }
 
-        [Required, MaxLength(20)]
+        [Required, MaxLength(50, ErrorMessage = "Max length is 50")]
         public string Title { get; set; }
 
-        public ICollection<Examination> Examinations { get; set; } = new HashSet<Examination>();
+        public List<Examination> Examinations { get; set; } = new List<Examination>();
     }
 }
