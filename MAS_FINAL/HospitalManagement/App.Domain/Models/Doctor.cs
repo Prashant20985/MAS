@@ -1,14 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Domain.Models
 {
-    [Table("Doctor")]
     public class Doctor : MedicalStaff
     {
-        [ForeignKey(nameof(Specialization))]
-        public int SpecializationId { get; set; }
-        public Specialization Specialization { get; set; }
+        [DisplayFormat(NullDisplayText = "N/A")]
+        public float BonusPerAppointment { get; set; }
 
-        public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
+        public List<Doctor_Specialization> Doctor_Specializations { get; set; } = new List<Doctor_Specialization>();
+        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
+
+        public override void calculateSalary()
+        {
+            int numberOfAppointmnets = Appointments.Count(x => x.DoctorId == this.PersonId);
+            MonthlySalary = RatePerHour * 8 * 20;
+            MonthlySalary += BonusPerAppointment * numberOfAppointmnets;
+        }
     }
 }

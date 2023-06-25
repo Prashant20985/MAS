@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Domain.Models
 {
@@ -13,6 +18,9 @@ namespace App.Domain.Models
         public int ExaminationTypeId { get; set; }
         public ExaminationType ExaminationType { get; set; }
 
-        public ICollection<ExaminationDiagnosis> ExaminationDiagnoses { get; set; } = new HashSet<ExaminationDiagnosis>();
+        public int AppointmentId { get; set; }
+        public Appointment Appointment { get; set; }
+
+        public List<Examination_Diagnosis> Examination_Diagnoses { get; set; } = new List<Examination_Diagnosis>();
     }
 }

@@ -35,6 +35,22 @@ namespace App.Application.Appointment
 
                 Status status = (Status)Enum.Parse(typeof(Status), request.Appointment?.Status);
 
+                if (request.Appointment.StartTime > request.Appointment.EndTime)
+                    return Result<Unit>.Failure("End time cannot be before Start time");
+
+                TimeSpan duration = request.Appointment.EndTime - request.Appointment.StartTime;
+                double hrsDifference = duration.TotalHours;
+
+                if (hrsDifference > 2)
+                {
+                    return Result<Unit>.Failure("An Appointment Cannot be longer than 2 hours");
+                }
+
+                if (request.Appointment.StartTime.Date != request.Appointment.EndTime.Date)
+                {
+                    return Result<Unit>.Failure("Appointemnt start time and end time must be on same date");
+                }
+
                 appointment.StartTime = request.Appointment.StartTime;
                 appointment.EndTime = request.Appointment.EndTime;
                 appointment.Status = status;

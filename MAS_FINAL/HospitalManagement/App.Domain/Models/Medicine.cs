@@ -13,11 +13,12 @@ namespace App.Domain.Models
         [Required]
         public int Amount { get; set; }
 
-        [Required, Column(TypeName = "nvarchar(20)")]
+        [Required, Column(TypeName = "varchar(32)")]
         public MedicineType MedicineType { get; set; }
 
-        [ForeignKey(nameof(Procedure))]
         public int ProcedureId { get; set; }
         public Procedure Procedure { get; set; }
+
+        public List<Procedure> Procedures { get; set; } = new List<Procedure>();    
     }
 }

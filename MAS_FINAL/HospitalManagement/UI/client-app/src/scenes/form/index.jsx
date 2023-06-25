@@ -49,7 +49,7 @@ const Form = () => {
         console.log(appointment);
         setInitailValues(appointment);
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
       setLoadingAppointment(false);
     };

@@ -36,8 +36,8 @@ const DoctorsList = () => {
     fetchData();
   }, []);
 
-  const handleEvent = (params) => {
-    navigate(`/appointments/` + params);
+  const handleEvent = (doctorId) => {
+    navigate(`/appointments/${doctorId}`);
   };
 
   const columns = [
@@ -77,6 +77,11 @@ const DoctorsList = () => {
       flex: 1,
       minWidth: 100,
       align: "left",
+    },
+    {
+      field: "salary",
+      headerName: "Salary",
+      flex: 1,
     },
     {
       field: "specialization",

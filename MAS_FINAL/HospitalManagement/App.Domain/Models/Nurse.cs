@@ -1,14 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Domain.Models
 {
-    [Table("Nurse")]
     public class Nurse : MedicalStaff
     {
-        [ForeignKey(nameof(Cerification))]
-        public int CertificationId { get; set; }
-        public Certification Cerification { get; set; }
+        public List<Nurse_Certification> Nurse_Certifications { get; set; } = new List<Nurse_Certification>();
+        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
 
-        public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
+        public override void calculateSalary()
+        {
+            MonthlySalary = RatePerHour * 8 * 20;
+        }
     }
 }
